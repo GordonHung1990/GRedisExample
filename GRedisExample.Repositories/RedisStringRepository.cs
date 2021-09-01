@@ -23,5 +23,8 @@ namespace GRedisExample.Repositories
 
         async ValueTask<bool> IRedisStringRepository.StringSetAsync(string key, string value, TimeSpan timeSpan)
             => await _connection.GetDatabaseDefault().StringSetAsync(key, value, timeSpan).ConfigureAwait(false);
+
+        async ValueTask<bool> IRedisStringRepository.KeyDeleteAsync(string key)
+            => await _connection.GetDatabaseDefault().KeyDeleteAsync(key).ConfigureAwait(false);
     }
 }

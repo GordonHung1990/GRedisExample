@@ -1,0 +1,9 @@
+version: "3"
+services:
+  redis:
+    image: "redis:alpine"
+    container_name: "redis-example"
+    command: redis-server --requirepass 1qaz@WSX
+    ports:
+      - "6379:6379"
+    restart: unless-stopped

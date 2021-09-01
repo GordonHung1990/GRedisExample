@@ -12,5 +12,6 @@ namespace GRedisExample.Repositories
         ValueTask<string> StringGetAsync(string key);
         ValueTask<bool> KeyExistsAsync(string key);
         ValueTask<bool> StringSetAsync(string key, string value, TimeSpan timeSpan);
+        ValueTask<bool> KeyDeleteAsync(string key);
     }
 }

@@ -18,7 +18,13 @@ namespace GRedisExample.Domains.Connections.Redis
             _setting = setting.Value;
             _connectionMultiplexer = new Lazy<ConnectionMultiplexer>(() =>
             {
-                return ConnectionMultiplexer.Connect($"{_setting.Url}:{_setting.Port},password={_setting.Autho}");
+                var connectionString = $"{_setting.Url}:{_setting.Port},allowAdmin=true";
+                if (!string.IsNullOrEmpty(_setting.Autho))
+                {
+                    connectionString += $",password={_setting.Autho}";
+                }
+
+                return ConnectionMultiplexer.Connect(connectionString);
             });
         }
         ConnectionMultiplexer IRedisConnection.GetConnection()

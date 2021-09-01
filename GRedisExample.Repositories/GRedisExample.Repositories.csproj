@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Microsoft.Extensions.DependencyInjection\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GRedisExample.Domains\GRedisExample.Domains.csproj" />
   </ItemGroup>
 

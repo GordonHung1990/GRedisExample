@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GRedisExample.Domains.ConfigurationSettings.Redis
+﻿namespace GRedisExample.Domains.ConfigurationSettings.Redis
 {
     public record RedisConfigurationSetting
     {

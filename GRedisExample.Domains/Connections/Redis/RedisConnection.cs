@@ -5,7 +5,7 @@ using System;
 
 namespace GRedisExample.Domains.Connections.Redis
 {
-    public class RedisConnection : IRedisConnection
+    internal sealed class RedisConnection : IRedisConnection
     {
         private readonly RedisConfigurationSetting _setting;
         private readonly Lazy<ConnectionMultiplexer> _connectionMultiplexer;

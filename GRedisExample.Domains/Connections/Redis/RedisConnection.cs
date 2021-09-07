@@ -23,13 +23,13 @@ namespace GRedisExample.Domains.Connections.Redis
                 return ConnectionMultiplexer.Connect(connectionString);
             });
         }
-        ConnectionMultiplexer IRedisConnection.GetConnection()
-            => _connectionMultiplexer.Value;
+        ConnectionMultiplexer IRedisConnection.Connection => _connectionMultiplexer.Value;
+
+        IDatabase IRedisConnection.DatabaseDefault => _connectionMultiplexer.Value.GetDatabase();
 
         IDatabase IRedisConnection.GetDatabase(int db)
             => _connectionMultiplexer.Value.GetDatabase(db);
 
-        IDatabase IRedisConnection.GetDatabaseDefault()
-            => _connectionMultiplexer.Value.GetDatabase();
+
     }
 }

@@ -4,9 +4,9 @@ namespace GRedisExample.Domains.Connections.Redis
 {
     public interface IRedisConnection
     {
-        ConnectionMultiplexer GetConnection();
+        ConnectionMultiplexer Connection { get; }
 
-        IDatabase GetDatabaseDefault();
+        IDatabase DatabaseDefault { get; }
 
         IDatabase GetDatabase(int dbIndex);
     }

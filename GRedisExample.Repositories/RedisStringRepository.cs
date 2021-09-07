@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GRedisExample.Domains.Connections.Redis;
+using StackExchange.Redis;
 
 namespace GRedisExample.Repositories
 {
@@ -12,19 +13,19 @@ namespace GRedisExample.Repositories
             _connection = connection ?? throw new ArgumentNullException(nameof(connection));
         }
 
-        async ValueTask<string> IRedisStringRepository.StringGetAsync(string key)
-            => await _connection.GetDatabaseDefault().StringGetAsync(key).ConfigureAwait(false);
+        Task<RedisValue> IRedisStringRepository.StringGetAsync(string key)
+           => _connection.DatabaseDefault.StringGetAsync(key);
 
-        async ValueTask<bool> IRedisStringRepository.StringSetAsync(string key, string value)
-            => await _connection.GetDatabaseDefault().StringSetAsync(key, value).ConfigureAwait(false);
+        Task<bool> IRedisStringRepository.StringSetAsync(string key, string value)
+           => _connection.DatabaseDefault.StringSetAsync(key, value);
 
-        async ValueTask<bool> IRedisStringRepository.KeyExistsAsync(string key)
-            => await _connection.GetDatabaseDefault().KeyExistsAsync(key).ConfigureAwait(false);
+        Task<bool> IRedisStringRepository.KeyExistsAsync(string key)
+           => _connection.DatabaseDefault.KeyExistsAsync(key);
 
-        async ValueTask<bool> IRedisStringRepository.StringSetAsync(string key, string value, TimeSpan timeSpan)
-            => await _connection.GetDatabaseDefault().StringSetAsync(key, value, timeSpan).ConfigureAwait(false);
+        Task<bool> IRedisStringRepository.StringSetAsync(string key, string value, TimeSpan timeSpan)
+           => _connection.DatabaseDefault.StringSetAsync(key, value, timeSpan);
 
-        async ValueTask<bool> IRedisStringRepository.KeyDeleteAsync(string key)
-            => await _connection.GetDatabaseDefault().KeyDeleteAsync(key).ConfigureAwait(false);
+        Task<bool> IRedisStringRepository.KeyDeleteAsync(string key)
+           => _connection.DatabaseDefault.KeyDeleteAsync(key);
     }
 }

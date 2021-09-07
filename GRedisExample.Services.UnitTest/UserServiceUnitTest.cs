@@ -20,7 +20,7 @@ namespace GRedisExample.Services.UnitTest
                 ModifiedDate = DateTimeOffset.UtcNow
             };
             var service = Substitute.For<IUserService>();
-            _ = service.AddAsync(data).Returns(await Task.FromResult(true));
+            _ = service.AddAsync(data).Returns(ValueTask.FromResult(true));
             var actual = await service.AddAsync(data).ConfigureAwait(false);
             Assert.AreEqual(true, actual);
         }
@@ -35,9 +35,9 @@ namespace GRedisExample.Services.UnitTest
                 ModifiedDate = DateTimeOffset.UtcNow
             };
             var service = Substitute.For<IUserService>();
-            _ = service.GetAsync("test").Returns(await Task.FromResult(data));
+            _ = service.GetAsync("test").Returns(ValueTask.FromResult(data));
             data.Name = "test2";
-            _ = service.EditAsync(data).Returns(await Task.FromResult(true));
+            _ = service.EditAsync(data).Returns(ValueTask.FromResult(true));
             _ = await service.EditAsync(data).ConfigureAwait(false);
             var actual = await service.GetAsync("test").ConfigureAwait(false);
             Assert.AreEqual(data.Name, actual.Name);
@@ -53,9 +53,26 @@ namespace GRedisExample.Services.UnitTest
                 ModifiedDate = DateTimeOffset.UtcNow
             };
             var service = Substitute.For<IUserService>();
-            _ = service.GetAsync("test").Returns(await Task.FromResult(data));
+            _ = service.GetAsync("test").Returns(ValueTask.FromResult(data));
             var actual = await service.GetAsync("test").ConfigureAwait(false);
             Assert.AreEqual(data.Account, actual.Account);
+        }
+        [Test]
+        public async Task DeleteAsync()
+        {
+            var data = new User()
+            {
+                Account = "test",
+                Name = "test",
+                CreationDate = DateTimeOffset.UtcNow,
+                ModifiedDate = DateTimeOffset.UtcNow
+            };
+            var service = Substitute.For<IUserService>();
+
+            _ = service.AddAsync(data).Returns(ValueTask.FromResult(true));
+            _ = service.DeleteAsync(data.Account).Returns(ValueTask.FromResult(true));
+            var actual = await service.DeleteAsync(data.Account).ConfigureAwait(false);
+            Assert.AreEqual(true, actual);
         }
     }
 }

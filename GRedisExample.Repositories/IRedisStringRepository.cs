@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
+using StackExchange.Redis;
 
 namespace GRedisExample.Repositories
 {
     public interface IRedisStringRepository
     {
-        ValueTask<bool> StringSetAsync(string key, string value);
-        ValueTask<string> StringGetAsync(string key);
-        ValueTask<bool> KeyExistsAsync(string key);
-        ValueTask<bool> StringSetAsync(string key, string value, TimeSpan timeSpan);
-        ValueTask<bool> KeyDeleteAsync(string key);
+        Task<bool> StringSetAsync(string key, string value);
+        Task<RedisValue> StringGetAsync(string key);
+        Task<bool> KeyExistsAsync(string key);
+        Task<bool> StringSetAsync(string key, string value, TimeSpan timeSpan);
+        Task<bool> KeyDeleteAsync(string key);
     }
 }

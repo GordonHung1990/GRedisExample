@@ -25,9 +25,12 @@ namespace GRedisExample
 
             services.AddControllers();
             services
-                .AddOptions()
-                .Configure<RedisConfigurationSetting>(Configuration.GetSection("Redis"))
-                .AddSingleton<IRedisConnection, RedisConnection>()
+                .AddRedisConnection((options, sp) =>
+                {
+                    var config = sp.GetRequiredService<IConfiguration>();
+
+                    config.GetSection("Redis").Bind(options);
+                })
                 .AddRepositories()
                 .AddServices();
 

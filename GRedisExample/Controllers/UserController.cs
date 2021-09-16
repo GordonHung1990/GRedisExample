@@ -31,7 +31,7 @@ namespace GRedisExample.Controllers
         /// <param name="account">The account.</param>
         /// <returns></returns>
         [HttpGet("{account}")]
-        public ValueTask<User> GetAsync(
+        public Task<User> GetAsync(
             [FromServices] IUserService service,
             string account)
             => service.GetAsync(account);
@@ -52,7 +52,7 @@ namespace GRedisExample.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public ValueTask<bool> AddAsync(
+        public Task<bool> AddAsync(
             [FromServices] IUserService service,
             [FromBody] UserAddViewModel model)
             => service.AddAsync(new User()
@@ -79,7 +79,7 @@ namespace GRedisExample.Controllers
         /// <param name="account">The account.</param>
         /// <returns></returns>
         [HttpPut("{account}")]
-        public ValueTask<bool> EditAsync(
+        public Task<bool> EditAsync(
             [FromServices] IUserService service,
             [FromBody] UserEditViewModel model,
             string account)
@@ -88,6 +88,7 @@ namespace GRedisExample.Controllers
                 Account = account,
                 Name = model.Name,
             });
+
         /// <summary>
         /// Deletes the asynchronous.
         /// </summary>
@@ -100,7 +101,7 @@ namespace GRedisExample.Controllers
         /// <param name="account">The account.</param>
         /// <returns></returns>
         [HttpDelete("{account}")]
-        public ValueTask<bool> DeleteAsync(
+        public Task<bool> DeleteAsync(
             [FromServices] IUserService service,
             string account)
             => service.DeleteAsync(account);

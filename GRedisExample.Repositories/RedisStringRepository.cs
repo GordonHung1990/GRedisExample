@@ -13,19 +13,19 @@ namespace GRedisExample.Repositories
             _connection = connection ?? throw new ArgumentNullException(nameof(connection));
         }
 
-        Task<RedisValue> IRedisStringRepository.StringGetAsync(string key)
+        public Task<RedisValue> StringGetAsync(string key)
            => _connection.DatabaseDefault.StringGetAsync(key);
 
-        Task<bool> IRedisStringRepository.StringSetAsync(string key, string value)
+        public Task<bool> StringSetAsync(string key, string value)
            => _connection.DatabaseDefault.StringSetAsync(key, value);
 
-        Task<bool> IRedisStringRepository.KeyExistsAsync(string key)
+        public Task<bool> KeyExistsAsync(string key)
            => _connection.DatabaseDefault.KeyExistsAsync(key);
 
-        Task<bool> IRedisStringRepository.StringSetAsync(string key, string value, TimeSpan timeSpan)
+        public Task<bool> StringSetAsync(string key, string value, TimeSpan timeSpan)
            => _connection.DatabaseDefault.StringSetAsync(key, value, timeSpan);
 
-        Task<bool> IRedisStringRepository.KeyDeleteAsync(string key)
+        public Task<bool> KeyDeleteAsync(string key)
            => _connection.DatabaseDefault.KeyDeleteAsync(key);
     }
 }

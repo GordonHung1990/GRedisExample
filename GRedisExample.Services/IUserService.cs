@@ -5,12 +5,12 @@ namespace GRedisExample.Services
 {
     public interface IUserService
     {
-        ValueTask<bool> AddAsync(User user);
+        Task<bool> AddAsync(User user);
 
-        ValueTask<bool> EditAsync(User user);
+        Task<bool> EditAsync(User user);
 
-        ValueTask<User> GetAsync(string account);
+        Task<User> GetAsync(string account);
 
-        ValueTask<bool> DeleteAsync(string account);
+        Task<bool> DeleteAsync(string account);
     }
 }
